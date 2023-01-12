@@ -1,0 +1,24 @@
+
+
+input {
+    border: 1px solid orangered;
+    box-shadow: rgb(rgb(61, 16, 16), rgb(85, 145, 85), rgb(95, 95, 179));
+}
+
+button{
+    background-color: rgb(4, 95, 95);
+    color: azure;
+}
+
+label{
+font-size: 25px;
+margin-right: 5px;
+}
+
+.position{
+ margin-left: 5px;
+}
+
+#table{
+    margin-top: 20px;
+}

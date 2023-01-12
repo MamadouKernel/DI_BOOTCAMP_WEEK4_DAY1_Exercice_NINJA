@@ -1,0 +1,57 @@
+<h1>PRODUCTS LIST</h1>
+<form action="" name="send">
+<div>
+    <label for="name">Name of product</label>
+    <input type="text" [(ngModel)]="name" name="name" >
+</div>
+<br>
+<div>
+    <label for="price" >Price of products</label>
+    <input type="number" [(ngModel)]="price" name="price">
+    <button class="position" type="submit" (click)="addProduct()">Save</button>
+</div>
+
+<br>
+<br>
+<div>
+    <label for="price" >Minimum </label>
+    <input type="number" id="filter1" [(ngModel)]="min" name="min">
+   
+</div>
+<div>
+    <label for="price" >Maximum </label>
+    <input type="number" id="filter2" [(ngModel)]="max" name="max">
+    
+  
+</div>
+
+
+<table border="1" id="table">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr *ngFor="let product of products | priceFilterPipe:min:max ">
+        <td>{{ product.name }}</td>
+        <td>{{ product.price }}</td>
+      </tr>
+</table>
+<br>
+<br>
+<h3>List GroupBy Category</h3>
+<select [(ngModel)]="order" name="order">
+<option value="1">ASC</option>
+<option value="2">DESC</option>
+</select>
+<table border="1" id="table">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+    </tr>
+    <tr *ngFor="let prod of products | categoryPipe:'name' | priceFilterPipe:min:max | sortPipe:order">
+        <td>{{ prod.name }}</td>
+        <td>{{ prod.price }}</td>
+      </tr>
+</table>
+</form>
+   

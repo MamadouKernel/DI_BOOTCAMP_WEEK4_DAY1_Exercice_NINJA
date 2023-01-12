@@ -1,0 +1,87 @@
+<div class=" px-4 py-5 md:px-6 lg:px-8 mt-2">
+	<div class="grid mt-2">
+		<div class="col-12 md:col-12 lg:col-12">
+			<div class="surface-card shadow-4 p-3 border-round">
+				<p-table [value]="products" [paginator]="true"
+						 [rows]="10" [showCurrentPageReport]="true"
+						 currentPageReportTemplate="De {first} à {last} sur {totalRecords} lignes"
+						 responsiveLayout="scroll"
+						 [rowsPerPageOptions]="[10,20,30,40]"
+						 [resizableColumns]="true"
+						 [loading]="loading"
+						 selectionMode="multiple"
+						 styleClass="p-datatable-gridlines">
+					<ng-template pTemplate="caption">
+						<div class="flex align-items-center justify-content-between">
+							<div class="left">
+								<h3 style="font-weight: bold;">Produits</h3>
+							</div>
+							<span class="right">
+									 <button pButton pRipple label="Créer un nouveau produit" icon="pi pi-plus" class="p-button-info"
+											 (click)="ouvrirModaleEdition()">
+									 </button>
+							</span>
+						</div>
+					</ng-template>
+					<ng-template pTemplate="header">
+						<tr>
+							<th pSortableColumn="nom" scope="col">
+								<div class="text-center">
+									Nom
+								</div>
+								<div class="text-center">
+									<p-sortIcon field="nom"></p-sortIcon>
+								</div>
+							</th>
+							<th pSortableColumn="prix" scope="col" >
+								<div class="text-center">
+									Prix
+								</div>
+								<div class="text-center">
+									<p-sortIcon field="nom"></p-sortIcon>
+								</div>
+							</th>
+						</tr>
+						<tr>
+							<th>
+								<p-columnFilter type="text" field="nom" matchMode="contains">
+								</p-columnFilter>
+							</th>
+							<th>
+								<p-columnFilter type="text" field="prix" matchMode="contains">
+								</p-columnFilter>
+							</th>
+						</tr>
+					</ng-template>
+					<ng-template pTemplate="body" let-product>
+						<tr>
+							<td>{{product.nom}}</td>
+							<td>{{product.prix}}</td>
+							<td style="flex: 0 0 4rem">
+								<button pButton pRipple type="button" icon="pi pi-trash" pTooltip="Détail"
+										class="p-button-rounded p-button-text">
+								</button>
+							</td>
+						</tr>
+					</ng-template>
+				</p-table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<p-dialog
+		[(visible)]="visible"
+		[style]="{width: '700px'}"
+		header="Création d'un produit"
+		[modal]="true" styleClass="p-fluid">
+	<form [formGroup]="productForms" (submit)="addProduct()">
+		<input type="text" formControlName="nom" pInputText >
+		<input type="number" formControlName="prix" pInputText >
+		<p-button label="Enregistrer" type="submit">
+			<i *ngIf="!loading" style="margin-right:5px ;" class="pi pi-check" ></i>
+		</p-button>
+	</form>
+</p-dialog>
+
+<p-toast  [style]="{top:'10%',right:0}"></p-toast>
